@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
 
@@ -33,9 +34,12 @@ const Login = () => {
           </div>
         </form>
         <p className="text-right text-[#1762ef] font-bold">Forgot password?</p>
-        <Button className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold">
-          Log In
-        </Button>
+        <Link to="/dashboard">
+          <Button className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold">
+            Log In
+          </Button>
+        </Link>
+
         <p className="text-center mt-4 text-gray">OR</p>
         <Button
           className="flex p-2
@@ -54,12 +58,15 @@ const Login = () => {
           />
           <p className="ml-8 font-bold text-[#263b5b]"> Log In with Google</p>
         </Button>
-        <p className="text-center mt-6">
-          Don't have an account?{" "}
-          <span className="text-[#1762ef] ml-2 font-bold cursor-pointer">
-            Sign Up
-          </span>
-        </p>
+        <Link to="/signup">
+          <p className="text-center mt-6">
+            Don't have an account?{" "}
+            <span className="text-[#1762ef] ml-2 font-bold cursor-pointer">
+              Sign Up
+              <Link to="/signup"></Link>
+            </span>
+          </p>
+        </Link>
       </div>
     </div>
   );
