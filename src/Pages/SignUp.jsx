@@ -1,33 +1,57 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
 
 export const SignUp = () => {
-  const getFormData = () => {
-    const storedValues = localStorage.getItem("inputData");
-
-    if (!storedValues)
-      return {
-        email: "",
-        username: "",
-        password: "",
-      };
-    return JSON.parse(storedValues);
-  };
-  const [formInputs, setFormInputs] = useState(getFormData());
+  const [formInputs, setFormInputs] = useState({});
+  const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormInputs((previousInput) => ({
       ...previousInput,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormErrors(validate(formInputs));
+  };
 
-    localStorage.setItem("inputData", JSON.stringify(formInputs));
+  //Validate function
+  const validate = (formInputs) => {
+    let errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    if (!formInputs.username) {
+      errors.username = "Username is required!";
+    }
+    if (!formInputs.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(formInputs.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!formInputs.password) {
+      errors.password = "Password is required!";
+    } else if (formInputs.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    } else if (formInputs.password.length > 10) {
+      errors.password = "Password cannot exceed more than 10 characters";
+    }
+    if (
+      regex &&
+      formInputs.email &&
+      formInputs.password &&
+      formInputs.username
+    ) {
+      localStorage.setItem("inputData", JSON.stringify(formInputs));
+      alert("Account created sucefully!");
+      navigate("/");
+    }
+    return errors;
   };
 
   return (
@@ -36,7 +60,7 @@ export const SignUp = () => {
         <Link to="/">
           <i className="fa-solid fa-arrow-left text-[#263b5b]"></i>
         </Link>
-        <div className="w-96 h-80">
+        <div className="w-96 h-60">
           <img
             src="https://blush.design/api/download?shareUri=uRtBLBBfXhpLVuHy&c=Bottom_0%7E2b44ff_Hair_0%7E181658_Skin_0%7E915b3c_Top_0%7Eff4133&w=800&h=800&fm=png"
             alt="signin-logo"
@@ -57,6 +81,7 @@ export const SignUp = () => {
               onChange={handleChange}
             />
           </div>
+          <p className="text-red-500 ml-4">{formErrors.email}</p>
           <div className="flex items-center mb-4 ">
             <i className="fa-solid fa-user mr-4 text-[#263b5b]"></i>
             <InputField
@@ -68,6 +93,7 @@ export const SignUp = () => {
               onChange={handleChange}
             />
           </div>
+          <p className="text-red-500 ml-4">{formErrors.username}</p>
           <div className="flex items-center mb-4 ">
             <i className="fa-solid fa-lock mr-4 text-[#263b5b]"></i>
             <InputField
@@ -79,15 +105,16 @@ export const SignUp = () => {
               onChange={handleChange}
             />
           </div>
+          <p className="text-red-500 ml-4">{formErrors.password}</p>
         </form>
-        <Link to="/">
-          <Button
-            className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold"
-            onClick={handleSubmit}
-          >
-            Continue
-          </Button>
-        </Link>
+
+        <Button
+          className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold"
+          onClick={handleSubmit}
+        >
+          {/* <ToastContainer /> */}
+          Continue
+        </Button>
 
         <p className="text-center mt-6 text-[#263b5b] font-bold">
           Joined us before?{" "}

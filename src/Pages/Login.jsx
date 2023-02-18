@@ -1,9 +1,55 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
 
 const Login = () => {
+  function handleCallbackResponse(response) {
+    var userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    navigate("/dashboard");
+  }
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "112572735124-feholttvs3q52lhd7q4c7lduijpp2b9k.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById("googleSignIn"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
+
+  const [loginDetails, setLoginDetails] = useState({});
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginDetails((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    console.log(loginDetails);
+  };
+
+  const savedInputs = JSON.parse(localStorage.getItem("inputData"));
+  console.log(savedInputs.password);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      savedInputs.email === loginDetails.email &&
+      savedInputs.password === loginDetails.password
+    ) {
+      navigate("/dashboard");
+    } else {
+      setError(true);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center">
       <div className="w-96 rounded-md bg-white mt-8  p-4">
@@ -22,6 +68,9 @@ const Login = () => {
               type="email"
               placeholder="Email"
               className="w-[98%] py-4 border-b outline-none placeholder:text-[#263b5b]"
+              onChange={handleChange}
+              name="email"
+              value={loginDetails.email}
             />
           </div>
           <div className="flex items-center mb-4 ">
@@ -30,18 +79,29 @@ const Login = () => {
               type="password"
               placeholder="Password"
               className="w-[98%] py-4 border-b outline-none placeholder:text-[#263b5b]"
+              onChange={handleChange}
+              name="password"
+              value={loginDetails.password}
             />
           </div>
         </form>
-        <p className="text-right text-[#1762ef] font-bold">Forgot password?</p>
-        <Link to="/dashboard">
-          <Button className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold">
-            Log In
-          </Button>
-        </Link>
+        {error && (
+          <p className="text-red-500 text-center font-bold">
+            Incorrect Username or Password
+          </p>
+        )}
+
+        {/* <p className="text-right text-[#1762ef] font-bold">Forgot password?</p> */}
+
+        <Button
+          className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold"
+          onClick={handleSubmit}
+        >
+          Log In
+        </Button>
 
         <p className="text-center mt-4 text-gray">OR</p>
-        <Button
+        {/* <Button
           className="flex p-2
           w-full
           mt-4
@@ -57,7 +117,8 @@ const Login = () => {
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
           />
           <p className="ml-8 font-bold text-[#263b5b]"> Log In with Google</p>
-        </Button>
+        </Button> */}
+        <div id="googleSignIn" className="mt-4 "></div>
         <Link to="/signup">
           <p className="text-center mt-6">
             Don't have an account?{" "}
