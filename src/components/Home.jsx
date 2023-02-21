@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 export const Home = () => {
@@ -6,7 +7,9 @@ export const Home = () => {
     <div className="flex justify-center items-center">
       <div className=" w-full sm:w-96  sm:rounded-md bg-white sm:mt-2 p-4">
         <div className="flex justify-between mb-8 items-center">
-          <i class="fa-solid fa-bars text-[#263b5b] text-2xl"></i>
+          <Link to="/">
+            <i className="fa-solid fa-arrow-left text-[#263b5b]"></i>
+          </Link>
           <img src="profile.jpg" alt="" className="rounded-full w-10 h-10" />
         </div>
 
