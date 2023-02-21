@@ -5,10 +5,15 @@ import Button from "../components/Button";
 import InputField from "../components/InputField";
 
 const Login = () => {
+  // inbuilt google log in
   function handleCallbackResponse(response) {
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
-    navigate("/dashboard");
+    if (userObject) {
+      navigate("/dashboard");
+    } else {
+      setError(true);
+    }
   }
   useEffect(() => {
     /* global google */
@@ -20,8 +25,10 @@ const Login = () => {
     google.accounts.id.renderButton(document.getElementById("googleSignIn"), {
       theme: "outline",
       size: "large",
+      width: 350,
+      height: 70,
     });
-  }, []);
+  });
 
   const [loginDetails, setLoginDetails] = useState({});
   const [error, setError] = useState(false);
@@ -33,7 +40,7 @@ const Login = () => {
       ...prev,
       [name]: value,
     }));
-    console.log(loginDetails);
+    // console.log(loginDetails);
   };
 
   const savedInputs = JSON.parse(localStorage.getItem("inputData"));
@@ -52,7 +59,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="w-96 rounded-md bg-white mt-8  p-4">
+      <div className="w-96 rounded-md bg-white mt-2  p-4">
         <div className="w-full h-[70%]">
           <img
             src="https://blush.design/api/download?shareUri=5a5c5KczFKqWhTmh&c=Bottom_0%7E393f82-0.1%7E393f82-0.2%7E393f82_Hair_0%7Eb58143-0.1%7Eb58143-0.2%7Ee8e1e1_Skin_0%7E57331f-0.1%7Ed4a181-0.2%7Ed4a181_Top_0%7Effa434-0.1%7Eff4133-0.2%7Ea8e5ba&w=800&h=800&fm=png"
@@ -91,7 +98,7 @@ const Login = () => {
           </p>
         )}
 
-        {/* <p className="text-right text-[#1762ef] font-bold">Forgot password?</p> */}
+        <p className="text-right text-[#1762ef] font-bold">Forgot password?</p>
 
         <Button
           className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold"
@@ -100,27 +107,12 @@ const Login = () => {
           Log In
         </Button>
 
-        <p className="text-center mt-4 text-gray">OR</p>
-        {/* <Button
-          className="flex p-2
-          w-full
-          mt-4
-          bg-gray-200
-          rounded-lg
-          text-black"
-        >
-          <img
-            className="ml-8"
-            width={30}
-            height={30}
-            alt="Google sign-in"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-          />
-          <p className="ml-8 font-bold text-[#263b5b]"> Log In with Google</p>
-        </Button> */}
-        <div id="googleSignIn" className="mt-4 "></div>
+        <p className="text-center mt-4 text-gray font-semibold">OR</p>
+
+        <div id="googleSignIn" className="mt-2 py-4"></div>
+
         <Link to="/signup">
-          <p className="text-center mt-6">
+          <p className="text-center mt-4">
             Don't have an account?{" "}
             <span className="text-[#1762ef] ml-2 font-bold cursor-pointer">
               Sign Up

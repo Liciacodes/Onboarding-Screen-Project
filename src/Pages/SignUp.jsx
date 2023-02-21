@@ -4,7 +4,11 @@ import Button from "../components/Button";
 import InputField from "../components/InputField";
 
 export const SignUp = () => {
-  const [formInputs, setFormInputs] = useState({});
+  const [formInputs, setFormInputs] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
@@ -21,6 +25,11 @@ export const SignUp = () => {
     setFormErrors(validate(formInputs));
   };
 
+  const setToLocalStorage = () => {
+    localStorage.setItem("inputData", JSON.stringify(formInputs));
+    alert("Account created succefully!");
+    navigate("/");
+  };
   //Validate function
   const validate = (formInputs) => {
     let errors = {};
@@ -41,22 +50,16 @@ export const SignUp = () => {
     } else if (formInputs.password.length > 10) {
       errors.password = "Password cannot exceed more than 10 characters";
     }
-    if (
-      regex &&
-      formInputs.email &&
-      formInputs.password &&
-      formInputs.username
-    ) {
-      localStorage.setItem("inputData", JSON.stringify(formInputs));
-      alert("Account created sucefully!");
-      navigate("/");
+    if (Object.keys(errors).length === 0) {
+      setToLocalStorage();
     }
+
     return errors;
   };
 
   return (
     <div className="flex justify-center items-center">
-      <div className="w-96 rounded-md bg-white mt-6 p-4">
+      <div className="w-96 rounded-md bg-white mt-1 p-4">
         <Link to="/">
           <i className="fa-solid fa-arrow-left text-[#263b5b]"></i>
         </Link>
