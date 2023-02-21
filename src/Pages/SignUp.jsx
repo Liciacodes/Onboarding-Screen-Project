@@ -59,11 +59,11 @@ export const SignUp = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="w-96 rounded-md bg-white mt-1 p-4">
+      <div className=" w-full sm:w-96 sm:rounded-md bg-white sm:mt-2 p-5 ">
         <Link to="/">
           <i className="fa-solid fa-arrow-left text-[#263b5b]"></i>
         </Link>
-        <div className="w-96 h-60">
+        <div className="w-full h-80 sm:mt-4 ">
           <img
             src="https://blush.design/api/download?shareUri=uRtBLBBfXhpLVuHy&c=Bottom_0%7E2b44ff_Hair_0%7E181658_Skin_0%7E915b3c_Top_0%7Eff4133&w=800&h=800&fm=png"
             alt="signin-logo"
