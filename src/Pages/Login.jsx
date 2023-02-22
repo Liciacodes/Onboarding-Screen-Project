@@ -11,8 +11,6 @@ const Login = () => {
     console.log(userObject);
     if (userObject) {
       navigate("/dashboard");
-    } else {
-      setError(true);
     }
   }
   useEffect(() => {
@@ -31,7 +29,7 @@ const Login = () => {
   });
 
   const [loginDetails, setLoginDetails] = useState({});
-  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -47,13 +45,24 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // if (
+    //   savedInputs.email === loginDetails.email &&
+    //   savedInputs.password === loginDetails.password
+    // ) {
+    //   navigate("/dashboard");
+    // }
     if (
       savedInputs.email === loginDetails.email &&
       savedInputs.password === loginDetails.password
     ) {
       navigate("/dashboard");
+    } else if (
+      loginDetails.email !== savedInputs.email &&
+      loginDetails.email !== savedInputs.email
+    ) {
+      setErrorMessage("Invalid User, Please Sign Up");
     } else {
-      setError(true);
+      setErrorMessage("Incorrect Username or Password");
     }
   };
 
@@ -67,7 +76,6 @@ const Login = () => {
           />
         </div>
         <h1 className="text-3xl font-bold text-[#263b5b]">Login</h1>
-
         <form className="mt-2">
           <div className="flex items-center">
             <i className="fa-thin fa-at  mr-4 text-[#263b5b]"></i>
@@ -92,13 +100,9 @@ const Login = () => {
             />
           </div>
         </form>
-        {error && (
-          <p className="text-red-500 text-center font-bold">
-            Incorrect Username or Password
-          </p>
+        {errorMessage && (
+          <p className="text-red-500 text-center font-bold">{errorMessage}</p>
         )}
-
-        <p className="text-right text-[#1762ef] font-bold">Forgot password?</p>
 
         <Button
           className="p-2 w-full mt-4 bg-[#1762ef] rounded-lg text-white font-bold"
@@ -106,11 +110,8 @@ const Login = () => {
         >
           Log In
         </Button>
-
         <p className="text-center mt-4 text-gray font-semibold">OR</p>
-
         <div id="googleSignIn" className="mt-2 py-4 "></div>
-
         <Link to="/signup">
           <p className="text-center mb-4">
             Don't have an account?{" "}
