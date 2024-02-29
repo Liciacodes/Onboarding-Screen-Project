@@ -58,12 +58,12 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className=" flex justify-center items-center h-screen">
       <div className=" w-full sm:w-96 sm:rounded-md bg-white sm:mt-2 p-5 ">
         <Link to="/">
           <i className="fa-solid fa-arrow-left text-[#263b5b]"></i>
         </Link>
-        <div className="w-full h-80 sm:mt-4 ">
+        <div className="w-full h-72 sm:mt-4 ">
           <img
             src="https://blush.design/api/download?shareUri=uRtBLBBfXhpLVuHy&c=Bottom_0%7E2b44ff_Hair_0%7E181658_Skin_0%7E915b3c_Top_0%7Eff4133&w=800&h=800&fm=png"
             alt="signin-logo"
@@ -72,7 +72,7 @@ export const SignUp = () => {
         </div>
         <h1 className="text-3xl font-bold text-[#263b5b]">Create an account</h1>
 
-        <form className="mt-4">
+        <form className="mt-0">
           <div className="flex items-center">
             <i className="fa-thin fa-at  mr-4 text-[#263b5b]"></i>
             <InputField

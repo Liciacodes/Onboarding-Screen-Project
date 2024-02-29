@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
+import SuccessModal from "../components/SuccessModal";
 
 const Login = () => {
   // inbuilt google log in
@@ -10,7 +11,7 @@ const Login = () => {
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     if (userObject) {
-      navigate("/dashboard");
+      setShowSuccessModal(true);
     }
   }
   useEffect(() => {
@@ -30,6 +31,7 @@ const Login = () => {
 
   const [loginDetails, setLoginDetails] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -55,7 +57,7 @@ const Login = () => {
       savedInputs.email === loginDetails.email &&
       savedInputs.password === loginDetails.password
     ) {
-      navigate("/dashboard");
+      setShowSuccessModal(true);
     } else if (
       loginDetails.email !== savedInputs.email &&
       loginDetails.email !== savedInputs.email
@@ -66,8 +68,12 @@ const Login = () => {
     }
   };
 
+  const closeModal = () => {
+    setShowSuccessModal(false);
+    navigate("/dashboard");
+  };
   return (
-    <div className="flex justify-center items-center mt-8">
+    <div className="flex justify-center items-center h-screen">
       <div className="w-full sm:rounded-md bg-white sm:mt-2  p-5 sm:w-96 ">
         <div className="w-full  h-[10%] sm:h-[50%]">
           <img
@@ -122,6 +128,7 @@ const Login = () => {
           </p>
         </Link>
       </div>
+      {showSuccessModal && <SuccessModal closeModal={closeModal} />}
     </div>
   );
 };
