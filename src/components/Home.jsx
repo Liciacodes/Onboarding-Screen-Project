@@ -4,7 +4,7 @@ import Button from "./Button";
 
 export const Home = () => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center mt-9">
       <div className=" w-full sm:w-96  sm:rounded-md bg-white sm:mt-2 p-4">
         <div className="flex justify-between mb-8 items-center">
           <Link to="/">
@@ -54,10 +54,10 @@ export const Home = () => {
           </div>
         </div>
         <div className="flex justify-around items-center">
-          <i className="fa-solid fa-house text-xl text-[#263b5b] "></i>
-          <i className="fa-solid fa-pencil text-xl text-[#263b5b]"></i>
-          <i className="fa-solid fa-bag-shopping text-xl text-[#263b5b]"></i>
-          <i className="fa-solid fa-magnifying-glass text-xl text-[#263b5b]"></i>
+          <i className="fa-solid fa-house text-xl text-[#263b5b] cursor-pointer"></i>
+          <i className="fa-solid fa-pencil text-xl text-[#263b5b] cursor-pointer"></i>
+          <i className="fa-solid fa-bag-shopping text-xl text-[#263b5b] cursor-pointer"></i>
+          <i className="fa-solid fa-magnifying-glass text-xl text-[#263b5b] cursor-pointer"></i>
         </div>
       </div>
     </div>
