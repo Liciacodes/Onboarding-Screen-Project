@@ -23,7 +23,7 @@ Home Page:
 ![Home-page](https://github.com/Liciacodes/Onboarding-Screen-Project/assets/43540999/f525f7e3-8019-4120-8bc4-980f8e8db831)
 
 
-What i have learnt from this project:
+What I have learnt from this project:
 1. Building Reusable Components in React.
 2. Fetching and Retrieveing data from LocalStorage.
 3. Using React Hooks.
