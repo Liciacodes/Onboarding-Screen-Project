@@ -25,7 +25,7 @@ Home Page:
 
 What i have learnt from this project:
 1. Building Reusable Components in React.
-2. fetching and Retrieveing data from LocalStorage.
+2. Fetching and Retrieveing data from LocalStorage.
 3. Using React Hooks.
 4. Using React Icons.
 5. Integrating Google Authenticator into a React Project.
