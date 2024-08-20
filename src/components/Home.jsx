@@ -4,8 +4,8 @@ import Button from "./Button";
 
 export const Home = () => {
   return (
-    <div className="flex justify-center items-center mt-9">
-      <div className=" w-full sm:w-96  sm:rounded-md bg-white sm:mt-2 p-4">
+    <div className="flex justify-center items-center mt-0 md:mt-9">
+      <div className=" w-full sm:w-96  sm:rounded-md bg-white mt-0 sm:mt-0 p-4">
         <div className="flex justify-between mb-8 items-center">
           <Link to="/">
             <i className="fa-solid fa-arrow-left text-[#263b5b]"></i>
@@ -19,7 +19,7 @@ export const Home = () => {
           discount
         </p>
 
-        <div className="mt-8 relative">
+        <div className="mt-4 relative">
           <img
             src="https://media.istockphoto.com/id/1063212632/photo/beautiful-mixes-race-woman-holding-shopping-bags-and-smiling.jpg?s=612x612&w=0&k=20&c=BglEfZGByZgOD2Err7wENGRRzwjQ0bKi1q87u3krN3g="
             alt=""
@@ -30,10 +30,10 @@ export const Home = () => {
             Shop Now
           </Button>
         </div>
-        <h1 className="mt-12 font-bold text-2xl mb-4 text-[#263b5b]">
+        <h1 className="mt-10 font-bold text-2xl mb-4 text-[#263b5b]">
           Top sales
         </h1>
-        <div className="flex gap-4 mb-4 sm:mb-2">
+        <div className="flex gap-4 mb-1 sm:mb-2">
           <div className="relative">
             <img
               src="https://media.istockphoto.com/id/948337254/photo/handsome-woman-in-white-blank-t-shirt-studio-model.jpg?s=612x612&w=0&k=20&c=uyt0ou1kQfQy69gZXtMTilEcOM1PNSypoMn7xhbMKFk="
