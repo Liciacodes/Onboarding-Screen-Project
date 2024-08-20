@@ -2,14 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   margin: 0;
   box-sizing: border-box;
-  background: #82c3ec
+  background: #82c3ec;
   /* #cccff8 */
 }
 
-
-
-
+@media only screen and (max-width: 600px) {
+  background: transparent;
+}
